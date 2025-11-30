@@ -7,15 +7,17 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#0f172a', // Slate 900
-                secondary: '#334155', // Slate 700
-                accent: '#3b82f6', // Blue 500
-                danger: '#ef4444', // Red 500
-                success: '#22c55e', // Green 500
-                warning: '#eab308', // Yellow 500
+                primary: {
+                    DEFAULT: '#2563eb',
+                    hover: '#1d4ed8',
+                },
+                accent: '#3b82f6',
+                danger: '#ef4444',
+                success: '#22c55e',
+                warning: '#eab308',
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
+                sans: ['Inter', 'system-ui', 'sans-serif'],
             },
         },
     },
