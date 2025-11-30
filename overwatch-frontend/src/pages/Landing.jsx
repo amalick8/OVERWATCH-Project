@@ -123,7 +123,7 @@ const Landing = () => {
             {/* CTA Section - fixed colors */}
             <section className="section-spacing">
                 <div className="container-custom">
-                    <Card className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 text-white rounded-3xl shadow-lg">
+                    <Card className="bg-gradient-to-br from-slate-950 via-blue-900 to-blue-600 text-white rounded-3xl shadow-lg">
                         <div className="py-16 flex flex-col items-center text-center space-y-6">
 
                             <h2 className="text-4xl md:text-5xl font-semibold text-white">
