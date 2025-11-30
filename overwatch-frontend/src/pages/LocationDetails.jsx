@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../api';
 import { ArrowLeft, Users, Activity, Clock, MapPin } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
 import {
@@ -35,8 +36,8 @@ const LocationDetails = () => {
         const fetchData = async () => {
             try {
                 const [locRes, histRes] = await Promise.all([
-                    axios.get(`http://localhost:5001/api/locations/${id}`),
-                    axios.get(`http://localhost:5001/api/live/${id}/history`),
+                    axios.get(`${API_URL}/api/locations/${id}`),
+                    axios.get(`${API_URL}/api/live/${id}/history`),
                 ]);
                 setLocation(locRes.data);
                 setHistory(histRes.data.reverse()); // Reverse to show oldest to newest

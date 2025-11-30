@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../api';
 import LiveStatusCard from '../components/LiveStatusCard';
 import { Search, Filter } from 'lucide-react';
 
@@ -12,12 +13,12 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5001/api/locations');
+                const { data } = await axios.get(`${API_URL}/api/locations`);
                 // For each location, fetch its live status
                 const locationsWithStatus = await Promise.all(
                     data.map(async (loc) => {
                         try {
-                            const statusRes = await axios.get(`http://localhost:5001/api/live/${loc._id}`);
+                            const statusRes = await axios.get(`${API_URL}/api/live/${loc._id}`);
                             return { ...loc, liveStatus: statusRes.data };
                         } catch (err) {
                             return { ...loc, liveStatus: null };
