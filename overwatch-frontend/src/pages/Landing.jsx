@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, MapPin, Users, TrendingUp, ArrowRight, Eye, Zap, Shield } from 'lucide-react';
+import { Activity, TrendingUp, Eye, Zap, Shield, ArrowRight } from 'lucide-react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 
@@ -97,7 +97,7 @@ const Landing = () => {
             <section className="section-spacing bg-white">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <h2 className="mb-4">Powerful Features</h2>
+                        <h2 className="mb-4 text-gray-900">Powerful Features</h2>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                             Everything you need to monitor and optimize your physical spaces.
                         </p>
@@ -111,7 +111,7 @@ const Landing = () => {
                                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                                         <Icon className="text-primary" size={24} />
                                     </div>
-                                    <h3 className="mb-2">{feature.title}</h3>
+                                    <h3 className="mb-2 text-gray-900">{feature.title}</h3>
                                     <p className="text-sm text-gray-600">{feature.description}</p>
                                 </Card>
                             );
@@ -120,25 +120,35 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
+            {/* CTA Section - fixed colors */}
             <section className="section-spacing">
                 <div className="container-custom">
-                    <Card className="bg-gradient-to-r from-primary to-accent text-white text-center">
-                        <div className="py-12 space-y-6">
-                            <h2 className="text-white">Ready to get started?</h2>
-                            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+                    <Card className="bg-gradient-to-r from-slate-900 via-blue-900 to-blue-600 text-white rounded-3xl shadow-lg">
+                        <div className="py-16 flex flex-col items-center text-center space-y-6">
+
+                            <h2 className="text-4xl md:text-5xl font-semibold text-white">
+                                Ready to get started?
+                            </h2>
+
+                            <p className="text-lg text-white/90 max-w-2xl">
                                 Join thousands of businesses using OVERWATCH to optimize their operations.
                             </p>
-                            <Link to="/register">
-                                <Button variant="secondary" className="text-base px-8 py-3 bg-white text-primary hover:bg-gray-100">
+
+                            <Link to="/register" className="pt-4">
+                                <Button
+                                    className="px-10 py-4 bg-white text-slate-900 font-semibold text-lg rounded-xl shadow hover:bg-gray-100 transition"
+                                    variant="secondary"
+                                >
                                     Start Your Free Trial
-                                    <ArrowRight size={18} />
+                                    <ArrowRight size={20} />
                                 </Button>
                             </Link>
+
                         </div>
                     </Card>
                 </div>
             </section>
+
 
             {/* Footer */}
             <footer className="border-t border-gray-200 bg-white py-8">
