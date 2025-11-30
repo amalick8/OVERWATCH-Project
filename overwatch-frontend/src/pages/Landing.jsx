@@ -153,7 +153,7 @@ const Landing = () => {
             {/* Footer */}
             <footer className="border-t border-gray-200 bg-white py-8">
                 <div className="container-custom text-center text-gray-600">
-                    <p>&copy; 2024 OVERWATCH. All rights reserved.</p>
+                    <p>&copy; 2025 OVERWATCH. All rights reserved by M. Ammar Malick.</p>
                 </div>
             </footer>
         </div>
