@@ -8,7 +8,7 @@
   * {
     @apply antialiased;
   }
-  
+
   body {
     @apply bg-gray-50 text-gray-900 font-sans;
   }
@@ -18,11 +18,11 @@
   }
 
   h2 {
-    @apply text-3xl font-semibold;
+    @apply text-3xl font-semibold text-gray-900;
   }
 
   h3 {
-    @apply text-xl font-semibold;
+    @apply text-xl font-semibold text-gray-900;
   }
 
   p {
