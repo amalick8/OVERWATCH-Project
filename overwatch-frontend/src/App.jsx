@@ -5,6 +5,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import LocationDetails from "./pages/LocationDetails.jsx";
+import Demo from "./pages/Demo.jsx";
 
 import Layout from "./components/Layout.jsx";
 
@@ -22,6 +23,7 @@ function App() {
                 <Route element={<Layout />}>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/locations/:id" element={<LocationDetails />} />
+                    <Route path="/demo" element={<Demo />} />
                 </Route>
 
             </Routes>

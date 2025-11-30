@@ -73,7 +73,7 @@ const Landing = () => {
                                     <ArrowRight size={18} />
                                 </Button>
                             </Link>
-                            <Link to="/dashboard">
+                            <Link to="/demo">
                                 <Button variant="secondary" className="text-base px-8 py-3">
                                     View Demo
                                 </Button>
