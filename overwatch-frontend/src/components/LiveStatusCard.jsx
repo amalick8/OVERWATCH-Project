@@ -1,62 +1,80 @@
 import React from 'react';
-import { Users, Activity, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Users, TrendingUp, Clock } from 'lucide-react';
+import Card from './Card';
+import BusynessBadge from './BusynessBadge';
 
 const LiveStatusCard = ({ location }) => {
-    // Mock live status if not available
-    const status = location.liveStatus || {
-        busynessScore: 0,
-        occupancy: 0,
-        movementScore: 0,
-        timestamp: new Date(),
-    };
+    const navigate = useNavigate();
+    const liveStatus = location.liveStatus || { busynessScore: 0, occupancy: 0, movementScore: 0 };
 
-    const getBusynessColor = (score) => {
-        if (score < 40) return 'text-success';
-        if (score < 70) return 'text-warning';
-        return 'text-danger';
-    };
-
-    const getBusynessBg = (score) => {
-        if (score < 40) return 'bg-green-100';
-        if (score < 70) return 'bg-yellow-100';
-        return 'bg-red-100';
+    const getOccupancyPercentage = () => {
+        if (!location.capacity) return 0;
+        return Math.round((liveStatus.occupancy / location.capacity) * 100);
     };
 
     return (
-        <Link to={`/locations/${location._id}`} className="card hover:shadow-md transition-shadow block">
-            <div className="flex justify-between items-start mb-4">
-                <div>
-                    <h3 className="font-bold text-lg text-slate-800">{location.name}</h3>
-                    <p className="text-sm text-slate-500 capitalize">{location.type}</p>
-                </div>
-                <div className={`px-3 py-1 rounded-full text-sm font-bold ${getBusynessBg(status.busynessScore)} ${getBusynessColor(status.busynessScore)}`}>
-                    {status.busynessScore}% Busy
-                </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-2">
-                    <Users size={18} className="text-slate-400" />
-                    <div>
-                        <p className="text-xs text-slate-500">Occupancy</p>
-                        <p className="font-semibold">{status.occupancy} / {location.capacity}</p>
+        <Card
+            hover
+            onClick={() => navigate(`/locations/${location._id}`)}
+            className="group"
+        >
+            <div className="space-y-4">
+                {/* Header */}
+                <div className="flex items-start justify-between">
+                    <div className="flex-1 min-w-0">
+                        <h3 className="truncate group-hover:text-primary transition-colors">
+                            {location.name}
+                        </h3>
+                        <div className="flex items-center gap-1.5 mt-1 text-sm text-gray-500">
+                            <MapPin size={14} />
+                            <span className="truncate">{location.address}</span>
+                        </div>
                     </div>
                 </div>
-                <div className="flex items-center gap-2">
-                    <Activity size={18} className="text-slate-400" />
+
+                {/* Busyness Badge */}
+                <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">Busyness</span>
+                    <BusynessBadge score={liveStatus.busynessScore} />
+                </div>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
                     <div>
-                        <p className="text-xs text-slate-500">Activity</p>
-                        <p className="font-semibold">{status.movementScore}</p>
+                        <div className="flex items-center gap-2 text-gray-500 mb-1">
+                            <Users size={16} />
+                            <span className="text-xs">Occupancy</span>
+                        </div>
+                        <p className="text-lg font-bold text-gray-900">
+                            {liveStatus.occupancy}/{location.capacity}
+                        </p>
+                        <p className="text-xs text-gray-500">{getOccupancyPercentage()}% full</p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2 text-gray-500 mb-1">
+                            <TrendingUp size={16} />
+                            <span className="text-xs">Activity</span>
+                        </div>
+                        <p className="text-lg font-bold text-gray-900">
+                            {liveStatus.movementScore || 0}
+                        </p>
+                        <p className="text-xs text-gray-500">movement score</p>
                     </div>
                 </div>
-            </div>
 
-            <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-400">
-                <Clock size={14} />
-                <span>Updated {new Date(status.timestamp).toLocaleTimeString()}</span>
+                {/* Last Updated */}
+                <div className="flex items-center gap-2 text-xs text-gray-500 pt-2 border-t border-gray-100">
+                    <Clock size={14} />
+                    <span>
+                        Updated {new Date(liveStatus.timestamp || Date.now()).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                    </span>
+                </div>
             </div>
-        </Link>
+        </Card>
     );
 };
 
