@@ -35,7 +35,7 @@ const Sidebar = () => {
                             key={item.name}
                             to={item.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${active
-                                ? 'bg-[#0f172a] text-white shadow-md'
+                                ? 'bg-[#2C3E55] text-white shadow-md'
                                 : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                                 }`}
                             onClick={() => setIsOpen(false)}
@@ -50,7 +50,7 @@ const Sidebar = () => {
             {/* User Profile Snippet at Bottom */}
             <div className="p-4 border-t border-gray-200 mt-auto">
                 <div className="flex items-center gap-3 px-2">
-                    <div className="w-8 h-8 rounded-full bg-[#0f172a]/10 flex items-center justify-center text-[#0f172a] font-bold text-xs">
+                    <div className="w-8 h-8 rounded-full bg-[#2C3E55]/10 flex items-center justify-center text-[#2C3E55] font-bold text-xs">
                         AU
                     </div>
                     <div className="flex-1 min-w-0">

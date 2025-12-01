@@ -13,13 +13,16 @@ const Navbar = () => {
         navigate('/');
     };
 
+    // Premium button styling - Lighter Navy
+    const premiumBtnClass = "bg-[#2C3E55] text-white shadow-sm shadow-[#2C3E55]/20 hover:bg-[#314766] hover:scale-[1.02] active:bg-[#233246] transition-all duration-200 border-none";
+
     return (
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-30">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex items-center justify-between h-16">
                     <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <Activity className="text-primary" size={28} />
-                        <span className="text-xl font-bold text-gray-900">OVERWATCH</span>
+                        <Activity className="text-[#2C3E55]" size={28} />
+                        <span className="text-xl font-bold text-[#2C3E55]">OVERWATCH</span>
                     </Link>
 
                     <div className="flex items-center gap-4">
@@ -37,10 +40,10 @@ const Navbar = () => {
                         ) : (
                             <>
                                 <Link to="/login">
-                                    <Button variant="secondary">Sign In</Button>
+                                    <Button className={premiumBtnClass}>Sign In</Button>
                                 </Link>
                                 <Link to="/register">
-                                    <Button>Get Started</Button>
+                                    <Button className={premiumBtnClass}>Get Started</Button>
                                 </Link>
                             </>
                         )}

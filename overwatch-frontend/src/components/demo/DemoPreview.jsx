@@ -126,18 +126,7 @@ const DemoPreview = ({ demoData }) => {
                             {stats.totalCapacity - stats.totalOccupancy}
                         </p>
                     </div>
-                </div>
-
-                {/* Mini Trend Line */}
-                <div className="flex items-center justify-center gap-1 opacity-50">
-                    {[20, 60, 45, 70].map((v, i) => (
-                        <div
-                            key={i}
-                            className="w-4 rounded-full bg-primary/20"
-                            style={{ height: `${v / 2}px` }}
-                        />
-                    ))}
-                </div>
+                </div> 
             </Card>
 
 

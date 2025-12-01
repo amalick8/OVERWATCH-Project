@@ -27,7 +27,7 @@ const Layout = () => {
                         {/* Premium Viewport Frame */}
                         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm min-h-full relative flex flex-col">
                             {/* Top Accent Bar */}
-                            <div className="h-1 w-full rounded-t-2xl bg-[#0f172a] opacity-[0.04]" />
+                            <div className="h-1 w-full rounded-t-2xl bg-[#2C3E55] opacity-[0.04]" />
 
                             {/* Inner Content Padding */}
                             <div className="p-8 md:p-10 flex-1">

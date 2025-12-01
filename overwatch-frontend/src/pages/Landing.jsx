@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Activity, TrendingUp, Eye, Zap, Shield, ArrowRight } from 'lucide-react';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import ContactModal from '../components/ContactModal';
 
 const Landing = () => {
+    const [isContactOpen, setIsContactOpen] = useState(false);
+
     const features = [
         {
             icon: Eye,
@@ -41,15 +44,15 @@ const Landing = () => {
                 <div className="container-custom">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-2">
-                            <Activity className="text-primary" size={28} />
-                            <span className="text-2xl font-bold text-gray-900">OVERWATCH</span>
+                            <Activity className="text-[#2C3E55]" size={28} />
+                            <span className="text-2xl font-bold text-[#2C3E55]">OVERWATCH</span>
                         </div>
                         <div className="flex items-center gap-4">
                             <Link to="/login">
-                                <Button variant="secondary">Sign In</Button>
+                                <Button className="bg-[#2C3E55] text-white shadow-sm shadow-[#2C3E55]/20 hover:bg-[#314766] hover:scale-[1.02] active:bg-[#233246] transition-all duration-200 border-none">Sign In</Button>
                             </Link>
                             <Link to="/register">
-                                <Button>Get Started</Button>
+                                <Button className="bg-[#2C3E55] text-white shadow-sm shadow-[#2C3E55]/20 hover:bg-[#314766] hover:scale-[1.02] active:bg-[#233246] transition-all duration-200 border-none">Get Started</Button>
                             </Link>
                         </div>
                     </div>
@@ -68,7 +71,7 @@ const Landing = () => {
                         </p>
                         <div className="flex items-center justify-center gap-4 pt-4">
                             <Link to="/register">
-                                <Button className="text-base px-8 py-3">
+                                <Button className="text-base px-8 py-3 bg-[#2C3E55] hover:bg-[#314766]">
                                     Start Free Trial
                                     <ArrowRight size={18} />
                                 </Button>
@@ -85,7 +88,7 @@ const Landing = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 max-w-4xl mx-auto">
                         {stats.map((stat, index) => (
                             <Card key={index} className="text-center">
-                                <p className="text-4xl font-bold text-primary">{stat.value}</p>
+                                <p className="text-4xl font-bold text-[#2C3E55]">{stat.value}</p>
                                 <p className="text-gray-600 mt-2">{stat.label}</p>
                             </Card>
                         ))}
@@ -108,8 +111,8 @@ const Landing = () => {
                             const Icon = feature.icon;
                             return (
                                 <Card key={index} hover className="flex flex-col">
-                                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                                        <Icon className="text-primary" size={24} />
+                                    <div className="w-12 h-12 rounded-lg bg-[#2C3E55]/10 flex items-center justify-center mb-4">
+                                        <Icon className="text-[#2C3E55]" size={24} />
                                     </div>
                                     <h3 className="mb-2 text-gray-900">{feature.title}</h3>
                                     <p className="text-sm text-gray-600">{feature.description}</p>
@@ -134,15 +137,23 @@ const Landing = () => {
                                 Join thousands of businesses using OVERWATCH to optimize their operations.
                             </p>
 
-                            <Link to="/register" className="pt-4">
-                                <Button
-                                    className="px-10 py-4 bg-white text-slate-900 font-semibold text-lg rounded-xl shadow hover:bg-gray-100 transition"
-                                    variant="secondary"
+                            <div className="flex items-center gap-4 pt-4">
+                                <Link to="/register">
+                                    <button
+                                        className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-lg font-semibold bg-white text-[#1B2A3B] hover:bg-gray-50 transition-all duration-200 ease-out shadow-sm hover:shadow-md border-none"
+                                    >
+                                        Start Your Free Trial
+                                        <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+                                    </button>
+                                </Link>
+
+                                <button
+                                    onClick={() => setIsContactOpen(true)}
+                                    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-lg font-semibold bg-transparent border-2 border-white/80 text-white hover:bg-white/10 transition-all duration-200 ease-out shadow-sm hover:shadow-md"
                                 >
-                                    Start Your Free Trial
-                                    <ArrowRight size={20} />
-                                </Button>
-                            </Link>
+                                    Contact Us
+                                </button>
+                            </div>
 
                         </div>
                     </Card>
@@ -156,6 +167,9 @@ const Landing = () => {
                     <p>&copy; 2025 OVERWATCH. All rights reserved by M. Ammar Malick.</p>
                 </div>
             </footer>
+
+            {/* Contact Modal */}
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </div>
     );
 };

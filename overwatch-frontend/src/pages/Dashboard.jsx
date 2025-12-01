@@ -24,7 +24,7 @@ const DashboardToggle = ({ activeMode }) => {
             <button
                 onClick={() => handleModeChange('demo')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeMode === 'demo'
-                    ? 'bg-[#0f172a] text-white shadow-sm'
+                    ? 'bg-[#2C3E55] text-white shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                     }`}
             >
@@ -33,7 +33,7 @@ const DashboardToggle = ({ activeMode }) => {
             <button
                 onClick={() => handleModeChange('live')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeMode === 'live'
-                    ? 'bg-[#0f172a] text-white shadow-sm'
+                    ? 'bg-[#2C3E55] text-white shadow-sm hover:bg-[#314766]'
                     : 'text-gray-600 hover:text-gray-900'
                     }`}
             >
@@ -95,18 +95,18 @@ const Dashboard = () => {
     const totalOccupancy = locations.reduce((sum, loc) => sum + (loc.liveStatus?.occupancy || 0), 0);
 
     return (
-        <div className="space-y-8 animate-fadeIn">
+        <div className="space-y-8 animate-fadeIn rounded-2xl border border-slate-200 bg-slate-50/40 shadow-sm p-6">
             {/* Header */}
-            <div className="flex items-start justify-between flex-wrap gap-4">
+            <div className="flex items-start justify-between flex-wrap gap-4 border-b border-slate-200 pb-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-[#0f172a] mb-2">Live Dashboard</h1>
-                    <p className="text-gray-600">Monitor real-time occupancy and busyness across your locations</p>
+                    <h1 className="text-3xl font-bold text-[#2C3E55] mb-2">Live Dashboard</h1>
+                    <p className="text-slate-600">Monitor real-time occupancy and busyness across your locations</p>
                 </div>
                 <div className="flex items-center gap-4">
                     <DashboardToggle activeMode="live" />
                     <button
                         onClick={fetchLocations}
-                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
+                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors shadow-sm"
                     >
                         Refresh Data
                     </button>
@@ -115,38 +115,38 @@ const Dashboard = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                <Card className="transition-all duration-300 rounded-xl border border-slate-200 hover:border-[#2C3E55] hover:shadow-md hover:shadow-[#2C3E55]/10">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-500 mb-1">Total Locations</p>
-                            <p className="text-3xl font-bold text-[#0f172a]">{totalLocations}</p>
+                            <p className="text-3xl font-bold text-[#2C3E55]">{totalLocations}</p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
-                            <Activity className="text-[#0f172a]" size={24} />
+                        <div className="w-12 h-12 rounded-xl bg-[#2C3E55]/10 flex items-center justify-center">
+                            <Activity className="text-[#2C3E55]" size={24} />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                <Card className="transition-all duration-300 rounded-xl border border-slate-200 hover:border-[#2C3E55] hover:shadow-md hover:shadow-[#2C3E55]/10">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-500 mb-1">Average Busyness</p>
-                            <p className="text-3xl font-bold text-[#0f172a]">{averageBusyness}%</p>
+                            <p className="text-3xl font-bold text-[#2C3E55]">{averageBusyness}%</p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
-                            <TrendingUp className="text-[#0f172a]" size={24} />
+                        <div className="w-12 h-12 rounded-xl bg-[#2C3E55]/10 flex items-center justify-center">
+                            <TrendingUp className="text-[#2C3E55]" size={24} />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                <Card className="transition-all duration-300 rounded-xl border border-slate-200 hover:border-[#2C3E55] hover:shadow-md hover:shadow-[#2C3E55]/10">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm font-medium text-gray-500 mb-1">Total Occupancy</p>
-                            <p className="text-3xl font-bold text-[#0f172a]">{totalOccupancy}</p>
+                            <p className="text-3xl font-bold text-[#2C3E55]">{totalOccupancy}</p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
-                            <Users className="text-[#0f172a]" size={24} />
+                        <div className="w-12 h-12 rounded-xl bg-[#2C3E55]/10 flex items-center justify-center">
+                            <Users className="text-[#2C3E55]" size={24} />
                         </div>
                     </div>
                 </Card>
@@ -162,13 +162,13 @@ const Dashboard = () => {
                             placeholder="Search locations..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] transition-all"
+                            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-[#2C3E55]/20 focus:border-[#2C3E55] transition-all"
                         />
                     </div>
                     <select
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
-                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] bg-white transition-all cursor-pointer hover:border-[#0f172a]"
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C3E55]/20 focus:border-[#2C3E55] bg-white transition-all cursor-pointer hover:border-[#2C3E55]"
                     >
                         <option value="all">All Types</option>
                         <option value="gym">Gyms</option>
@@ -185,11 +185,11 @@ const Dashboard = () => {
                     <Loader size="lg" />
                 </div>
             ) : error ? (
-                <Card className="text-center py-16 border-red-100 bg-red-50/50 rounded-xl">
-                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <AlertCircle className="text-red-500" size={32} />
+                <Card className="text-center py-16 border-blue-100 bg-blue-50 rounded-xl">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <AlertCircle className="text-[#2C3E55]" size={32} />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Error Loading Locations</h3>
+                    <h3 className="text-lg font-medium text-[#2C3E55] mb-2">Error Loading Locations</h3>
                     <p className="text-gray-600 max-w-md mx-auto">{error}</p>
                     <button
                         onClick={fetchLocations}

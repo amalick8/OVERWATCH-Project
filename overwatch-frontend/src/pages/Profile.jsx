@@ -13,7 +13,7 @@ const Profile = () => {
         <div className="space-y-8 animate-fadeIn">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-[#0f172a] mb-2">Profile</h1>
+                <h1 className="text-3xl font-bold text-[#2C3E55] mb-2">Profile</h1>
                 <p className="text-gray-600">Manage your account settings and preferences</p>
             </div>
 
@@ -21,12 +21,12 @@ const Profile = () => {
                 {/* Left Column - User Info */}
                 <div className="lg:col-span-1 space-y-6">
                     <Card className="shadow-sm rounded-xl border border-gray-100 text-center p-8">
-                        <div className="w-24 h-24 bg-[#0f172a]/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <User className="text-[#0f172a]" size={48} />
+                        <div className="w-24 h-24 bg-[#2C3E55]/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <User className="text-[#2C3E55]" size={48} />
                         </div>
                         <h2 className="text-xl font-bold text-gray-900">Admin User</h2>
                         <p className="text-gray-500 mb-6">admin@overwatch.com</p>
-                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f172a]/10 text-[#0f172a] text-sm font-medium">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#2C3E55]/10 text-[#2C3E55] text-sm font-medium">
                             <Shield size={14} className="mr-1.5" />
                             Administrator
                         </div>
@@ -37,7 +37,7 @@ const Profile = () => {
                 <div className="lg:col-span-2 space-y-6">
                     {/* Personal Information */}
                     <Card className="shadow-sm rounded-xl border border-gray-100">
-                        <h3 className="text-lg font-semibold text-[#0f172a] mb-6 flex items-center gap-2">
+                        <h3 className="text-lg font-semibold text-[#2C3E55] mb-6 flex items-center gap-2">
                             <User size={20} className="text-gray-400" />
                             Personal Information
                         </h3>
@@ -48,7 +48,7 @@ const Profile = () => {
                                     <input
                                         type="text"
                                         defaultValue="Admin User"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] outline-none"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C3E55]/20 focus:border-[#2C3E55] outline-none"
                                     />
                                 </div>
                                 <div>
@@ -56,7 +56,7 @@ const Profile = () => {
                                     <input
                                         type="email"
                                         defaultValue="admin@overwatch.com"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] outline-none"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C3E55]/20 focus:border-[#2C3E55] outline-none"
                                     />
                                 </div>
                                 <div>
@@ -73,12 +73,12 @@ const Profile = () => {
                                     <input
                                         type="text"
                                         defaultValue="Overwatch Inc."
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] outline-none"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C3E55]/20 focus:border-[#2C3E55] outline-none"
                                     />
                                 </div>
                             </div>
                             <div className="pt-4 flex justify-end">
-                                <button className="px-4 py-2 bg-[#0f172a] text-white rounded-lg hover:bg-[#0f172a]/90 transition-colors">
+                                <button className="px-4 py-2 bg-[#2C3E55] text-white rounded-lg hover:bg-[#2C3E55]/90 transition-colors">
                                     Save Changes
                                 </button>
                             </div>
@@ -87,7 +87,7 @@ const Profile = () => {
 
                     {/* Notification Settings */}
                     <Card className="shadow-sm rounded-xl border border-gray-100">
-                        <h3 className="text-lg font-semibold text-[#0f172a] mb-6 flex items-center gap-2">
+                        <h3 className="text-lg font-semibold text-[#2C3E55] mb-6 flex items-center gap-2">
                             <Bell size={20} className="text-gray-400" />
                             Notifications
                         </h3>
@@ -107,7 +107,7 @@ const Profile = () => {
                                         onChange={() => setNotifications(prev => ({ ...prev, email: !prev.email }))}
                                         className="sr-only peer"
                                     />
-                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#0f172a]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0f172a]"></div>
+                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#2C3E55]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2C3E55]"></div>
                                 </label>
                             </div>
 
@@ -126,7 +126,7 @@ const Profile = () => {
                                         onChange={() => setNotifications(prev => ({ ...prev, push: !prev.push }))}
                                         className="sr-only peer"
                                     />
-                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#0f172a]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0f172a]"></div>
+                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#2C3E55]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2C3E55]"></div>
                                 </label>
                             </div>
                         </div>
@@ -134,7 +134,7 @@ const Profile = () => {
 
                     {/* Account Actions */}
                     <Card className="shadow-sm rounded-xl border border-gray-100">
-                        <h3 className="text-lg font-semibold text-[#0f172a] mb-6 flex items-center gap-2">
+                        <h3 className="text-lg font-semibold text-[#2C3E55] mb-6 flex items-center gap-2">
                             <Shield size={20} className="text-gray-400" />
                             Security
                         </h3>
