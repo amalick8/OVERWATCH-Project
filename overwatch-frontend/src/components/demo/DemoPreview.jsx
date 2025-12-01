@@ -69,15 +69,72 @@ const DemoPreview = ({ demoData }) => {
                 </Card>
             </div>
 
-            {/* Capacity Gauge - Full Width */}
-            <Card className="transition-all duration-500 hover:shadow-lg">
-                <h3 className="mb-2 text-center">Overall Capacity Usage</h3>
-                <CapacityGauge
-                    percentage={Math.round(
-                        (stats.totalOccupancy / (stats.totalLocations * 100)) * 100
-                    )}
-                />
+            {/* Capacity Gauge */}
+            <Card className="p-8">
+                <h3 className="mb-6 text-center text-gray-900 font-semibold text-lg">
+                    Overall Capacity Usage
+                </h3>
+
+                {/* Gauge Center */}
+                <div className="flex justify-center mb-6">
+                    <div className="w-64">
+                        <CapacityGauge
+                            percentage={Math.round((stats.totalOccupancy / (stats.totalLocations * 100)) * 100)}
+                        />
+                    </div>
+                </div>
+
+                {/* Status Tag */}
+                <div className="flex justify-center mb-6">
+                    <span className={`
+                        px-4 py-1.5 rounded-full text-sm font-semibold
+                        ${stats.avgBusyness < 40 ? "bg-green-100 text-green-700" : ""}
+                        ${stats.avgBusyness >= 40 && stats.avgBusyness < 70 ? "bg-yellow-100 text-yellow-700" : ""}
+                        ${stats.avgBusyness >= 70 ? "bg-red-100 text-red-700" : ""}
+                    `}>
+                        {stats.avgBusyness < 40 && "Low Usage"}
+                        {stats.avgBusyness >= 40 && stats.avgBusyness < 70 && "Moderate Usage"}
+                        {stats.avgBusyness >= 70 && "High Usage"}
+                    </span>
+                </div>
+
+                {/* Usage Breakdown */}
+                <div className="grid grid-cols-3 text-center mb-6">
+                    <div>
+                        <p className="text-sm text-gray-500">Total Capacity</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                            {stats.totalLocations * 100}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="text-sm text-gray-500">Current</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                            {stats.totalOccupancy}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="text-sm text-gray-500">Remaining</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                            {(stats.totalLocations * 100) - stats.totalOccupancy}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Mini Trend Line */}
+                <div className="flex items-center justify-center gap-1 opacity-50">
+                    {[20, 60, 45, 70].map((v, i) => (
+                        <div
+                            key={i}
+                            className="w-4 rounded-full bg-primary/20"
+                            style={{ height: `${v / 2}px` }}
+                        />
+                    ))}
+                </div>
             </Card>
+
+
 
             {/* Locations List */}
             <Card className="transition-all duration-500 hover:shadow-lg">
