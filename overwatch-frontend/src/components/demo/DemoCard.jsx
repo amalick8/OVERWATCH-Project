@@ -43,7 +43,7 @@ const DemoCard = ({ demo, isSelected, onClick }) => {
             `}
         >
             <div className="space-y-4">
-                
+
                 {/* Icon + Active badge */}
                 <div className="flex items-start justify-between">
                     <div

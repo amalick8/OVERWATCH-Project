@@ -48,7 +48,7 @@ const HourlyOccupancyChart = ({ data }) => {
                     animationDuration={1200}
                     animationEasing="ease-in-out"
                 >
-                    {data.map((entry, index) => (
+                    {data && data.map((entry, index) => (
                         <Cell key={`cell-${index}`} />
                     ))}
                 </Bar>

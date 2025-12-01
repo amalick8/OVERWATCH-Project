@@ -5,14 +5,14 @@ const CapacityGauge = ({ percentage }) => {
     const normalizedPercentage = Math.min(Math.max(percentage, 0), 100);
 
     const getColor = (pct) => {
-        if (pct <= 40) return '#22c55e'; // Green - Low
-        if (pct <= 70) return '#f59e0b'; // Orange - Medium
+        if (pct <= 45) return '#22c55e'; // Green - Low
+        if (pct <= 75) return '#f59e0b'; // Orange - Medium
         return '#ef4444'; // Red - High
     };
 
     const getStatus = (pct) => {
-        if (pct <= 40) return 'Low';
-        if (pct <= 70) return 'Medium';
+        if (pct <= 45) return 'Low';
+        if (pct <= 75) return 'Medium';
         return 'High';
     };
 
@@ -65,15 +65,15 @@ const CapacityGauge = ({ percentage }) => {
             <div className="flex items-center justify-center gap-6 mt-6 w-full">
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="text-xs text-gray-600 font-medium">Low (0-40%)</span>
+                    <span className="text-xs text-gray-600 font-medium">Low (0-45%)</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                    <span className="text-xs text-gray-600 font-medium">Medium (41-70%)</span>
+                    <span className="text-xs text-gray-600 font-medium">Medium (46-75%)</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <span className="text-xs text-gray-600 font-medium">High (71-100%)</span>
+                    <span className="text-xs text-gray-600 font-medium">High (76-100%)</span>
                 </div>
             </div>
         </div>

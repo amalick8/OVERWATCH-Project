@@ -7,7 +7,13 @@ import CapacityGauge from './charts/CapacityGauge';
 import { Activity, Users, TrendingUp, MapPin } from 'lucide-react';
 
 const DemoPreview = ({ demoData }) => {
+    if (!demoData) return null;
+
     const { title, stats, locations, trendData, hourlyData } = demoData;
+
+    // Calculate overall capacity percentage correctly
+    // (totalOccupancy / totalCapacity) * 100
+    const overallCapacityPercentage = Math.round((stats.totalOccupancy / stats.totalCapacity) * 100);
 
     return (
         <div className="space-y-6">
@@ -79,7 +85,7 @@ const DemoPreview = ({ demoData }) => {
                 <div className="flex justify-center mb-6">
                     <div className="w-64">
                         <CapacityGauge
-                            percentage={Math.round((stats.totalOccupancy / (stats.totalLocations * 100)) * 100)}
+                            percentage={overallCapacityPercentage}
                         />
                     </div>
                 </div>
@@ -88,13 +94,13 @@ const DemoPreview = ({ demoData }) => {
                 <div className="flex justify-center mb-6">
                     <span className={`
                         px-4 py-1.5 rounded-full text-sm font-semibold
-                        ${stats.avgBusyness < 40 ? "bg-green-100 text-green-700" : ""}
-                        ${stats.avgBusyness >= 40 && stats.avgBusyness < 70 ? "bg-yellow-100 text-yellow-700" : ""}
-                        ${stats.avgBusyness >= 70 ? "bg-red-100 text-red-700" : ""}
+                        ${overallCapacityPercentage < 45 ? "bg-green-100 text-green-700" : ""}
+                        ${overallCapacityPercentage >= 45 && overallCapacityPercentage < 75 ? "bg-yellow-100 text-yellow-700" : ""}
+                        ${overallCapacityPercentage >= 75 ? "bg-red-100 text-red-700" : ""}
                     `}>
-                        {stats.avgBusyness < 40 && "Low Usage"}
-                        {stats.avgBusyness >= 40 && stats.avgBusyness < 70 && "Moderate Usage"}
-                        {stats.avgBusyness >= 70 && "High Usage"}
+                        {overallCapacityPercentage < 45 && "Low Usage"}
+                        {overallCapacityPercentage >= 45 && overallCapacityPercentage < 75 && "Moderate Usage"}
+                        {overallCapacityPercentage >= 75 && "High Usage"}
                     </span>
                 </div>
 
@@ -103,7 +109,7 @@ const DemoPreview = ({ demoData }) => {
                     <div>
                         <p className="text-sm text-gray-500">Total Capacity</p>
                         <p className="text-lg font-semibold text-gray-900">
-                            {stats.totalLocations * 100}
+                            {stats.totalCapacity}
                         </p>
                     </div>
 
@@ -117,7 +123,7 @@ const DemoPreview = ({ demoData }) => {
                     <div>
                         <p className="text-sm text-gray-500">Remaining</p>
                         <p className="text-lg font-semibold text-gray-900">
-                            {(stats.totalLocations * 100) - stats.totalOccupancy}
+                            {stats.totalCapacity - stats.totalOccupancy}
                         </p>
                     </div>
                 </div>
