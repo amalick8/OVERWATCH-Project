@@ -5,8 +5,9 @@ const {
     getLiveStatusByLocation,
     getLiveStatusHistory,
 } = require('../controllers/liveStatusController');
+const verifySensorKey = require('../middleware/verifySensorKey');
 
-router.post('/update', updateLiveStatus);
+router.post('/update', verifySensorKey, updateLiveStatus);
 router.get('/:locationId', getLiveStatusByLocation);
 router.get('/:locationId/history', getLiveStatusHistory);
 

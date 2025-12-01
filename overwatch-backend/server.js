@@ -9,6 +9,8 @@ const connectDB = require('./src/utils/db');
 const userRoutes = require('./src/routes/userRoutes');
 const locationRoutes = require('./src/routes/locationRoutes');
 const liveStatusRoutes = require('./src/routes/liveStatusRoutes');
+const analyticsRoutes = require('./src/routes/analyticsRoutes');
+const demoRoutes = require('./src/routes/demoRoutes');
 
 // Load env vars
 dotenv.config();
@@ -35,6 +37,8 @@ app.use(morgan('dev'));
 app.use('/api/users', userRoutes);
 app.use('/api/locations', locationRoutes);
 app.use('/api/live', liveStatusRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/demo', demoRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
