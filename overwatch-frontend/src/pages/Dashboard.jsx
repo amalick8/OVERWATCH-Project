@@ -1,11 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import API_URL from '../api';
-import Sidebar from '../components/Sidebar';
 import LiveStatusCard from '../components/LiveStatusCard';
 import Loader from '../components/Loader';
 import Card from '../components/Card';
-import { Search, Activity, Users, TrendingUp, AlertCircle } from 'lucide-react';
+import { Search, Activity, Users, TrendingUp, AlertCircle, MapPin } from 'lucide-react';
+
+// Toggle Component
+const DashboardToggle = ({ activeMode }) => {
+    const navigate = useNavigate();
+
+    const handleModeChange = (mode) => {
+        if (mode === 'demo') {
+            navigate('/demo');
+        } else if (mode === 'live') {
+            navigate('/dashboard');
+        }
+    };
+
+    return (
+        <div className="inline-flex items-center bg-white border border-gray-200 rounded-lg p-1 shadow-sm">
+            <button
+                onClick={() => handleModeChange('demo')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeMode === 'demo'
+                    ? 'bg-[#0f172a] text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                    }`}
+            >
+                Demo Mode
+            </button>
+            <button
+                onClick={() => handleModeChange('live')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeMode === 'live'
+                    ? 'bg-[#0f172a] text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                    }`}
+            >
+                Live Mode
+            </button>
+        </div>
+    );
+};
 
 const Dashboard = () => {
     const [locations, setLocations] = useState([]);
@@ -59,121 +95,144 @@ const Dashboard = () => {
     const totalOccupancy = locations.reduce((sum, loc) => sum + (loc.liveStatus?.occupancy || 0), 0);
 
     return (
-        <div className="flex h-screen bg-gray-50">
-            <Sidebar />
-
-            <div className="flex-1 overflow-y-auto">
-                {/* Header */}
-                <div className="bg-white border-b border-gray-200 sticky top-0 z-20">
-                    <div className="px-6 py-6">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h1 className="text-4xl">Live Dashboard</h1>
-                                <p className="text-gray-600 mt-2">Monitor real-time occupancy and busyness</p>
-                            </div>
-                            <button
-                                onClick={fetchLocations}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
-                            >
-                                Refresh Data
-                            </button>
-                        </div>
-                    </div>
+        <div className="space-y-8 animate-fadeIn">
+            {/* Header */}
+            <div className="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <h1 className="text-3xl font-bold text-[#0f172a] mb-2">Live Dashboard</h1>
+                    <p className="text-gray-600">Monitor real-time occupancy and busyness across your locations</p>
                 </div>
-
-                <div className="p-6 space-y-6">
-                    {/* Stats Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <Card>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-1">Total Locations</p>
-                                    <p className="text-3xl font-bold text-gray-900">{totalLocations}</p>
-                                </div>
-                                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                                    <Activity className="text-primary" size={24} />
-                                </div>
-                            </div>
-                        </Card>
-
-                        <Card>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-1">Average Busyness</p>
-                                    <p className="text-3xl font-bold text-gray-900">{averageBusyness}%</p>
-                                </div>
-                                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                                    <TrendingUp className="text-accent" size={24} />
-                                </div>
-                            </div>
-                        </Card>
-
-                        <Card>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-1">Total Occupancy</p>
-                                    <p className="text-3xl font-bold text-gray-900">{totalOccupancy}</p>
-                                </div>
-                                <div className="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center">
-                                    <Users className="text-success" size={24} />
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-
-                    {/* Search and Filter */}
-                    <Card>
-                        <div className="flex flex-col md:flex-row gap-4">
-                            <div className="flex-1 relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                                <input
-                                    type="text"
-                                    placeholder="Search locations..."
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                />
-                            </div>
-                            <select
-                                value={filter}
-                                onChange={(e) => setFilter(e.target.value)}
-                                className="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
-                            >
-                                <option value="all">All Types</option>
-                                <option value="gym">Gyms</option>
-                                <option value="library">Libraries</option>
-                                <option value="dining">Dining</option>
-                                <option value="mall">Malls</option>
-                            </select>
-                        </div>
-                    </Card>
-
-                    {/* Content States */}
-                    {loading ? (
-                        <div className="flex justify-center items-center h-64">
-                            <Loader size="lg" />
-                        </div>
-                    ) : error ? (
-                        <Card className="text-center py-12">
-                            <AlertCircle className="mx-auto text-red-500 mb-4" size={48} />
-                            <p className="text-lg text-gray-900 mb-2">Error Loading Locations</p>
-                            <p className="text-gray-600">{error}</p>
-                        </Card>
-                    ) : filteredLocations.length === 0 ? (
-                        <Card className="text-center py-12">
-                            <Activity className="mx-auto text-gray-400 mb-4" size={48} />
-                            <p className="text-lg text-gray-900 mb-2">No Locations Found</p>
-                            <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
-                        </Card>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {filteredLocations.map((location) => (
-                                <LiveStatusCard key={location._id} location={location} />
-                            ))}
-                        </div>
-                    )}
+                <div className="flex items-center gap-4">
+                    <DashboardToggle activeMode="live" />
+                    <button
+                        onClick={fetchLocations}
+                        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
+                    >
+                        Refresh Data
+                    </button>
                 </div>
             </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm font-medium text-gray-500 mb-1">Total Locations</p>
+                            <p className="text-3xl font-bold text-[#0f172a]">{totalLocations}</p>
+                        </div>
+                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
+                            <Activity className="text-[#0f172a]" size={24} />
+                        </div>
+                    </div>
+                </Card>
+
+                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm font-medium text-gray-500 mb-1">Average Busyness</p>
+                            <p className="text-3xl font-bold text-[#0f172a]">{averageBusyness}%</p>
+                        </div>
+                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
+                            <TrendingUp className="text-[#0f172a]" size={24} />
+                        </div>
+                    </div>
+                </Card>
+
+                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 rounded-xl border border-gray-100">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm font-medium text-gray-500 mb-1">Total Occupancy</p>
+                            <p className="text-3xl font-bold text-[#0f172a]">{totalOccupancy}</p>
+                        </div>
+                        <div className="w-12 h-12 rounded-xl bg-[#0f172a]/5 flex items-center justify-center">
+                            <Users className="text-[#0f172a]" size={24} />
+                        </div>
+                    </div>
+                </Card>
+            </div>
+
+            {/* Search and Filter */}
+            <Card className="shadow-sm rounded-xl border border-gray-100">
+                <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex-1 relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                        <input
+                            type="text"
+                            placeholder="Search locations..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] transition-all"
+                        />
+                    </div>
+                    <select
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f172a]/20 focus:border-[#0f172a] bg-white transition-all cursor-pointer hover:border-[#0f172a]"
+                    >
+                        <option value="all">All Types</option>
+                        <option value="gym">Gyms</option>
+                        <option value="library">Libraries</option>
+                        <option value="dining">Dining</option>
+                        <option value="mall">Malls</option>
+                    </select>
+                </div>
+            </Card>
+
+            {/* Content States */}
+            {loading ? (
+                <div className="flex justify-center items-center h-64">
+                    <Loader size="lg" />
+                </div>
+            ) : error ? (
+                <Card className="text-center py-16 border-red-100 bg-red-50/50 rounded-xl">
+                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <AlertCircle className="text-red-500" size={32} />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Error Loading Locations</h3>
+                    <p className="text-gray-600 max-w-md mx-auto">{error}</p>
+                    <button
+                        onClick={fetchLocations}
+                        className="mt-6 px-6 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                    >
+                        Try Again
+                    </button>
+                </Card>
+            ) : filteredLocations.length === 0 ? (
+                <Card className="text-center py-20 border-dashed rounded-xl">
+                    <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <MapPin className="text-gray-400" size={40} />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No Locations Found</h3>
+                    <p className="text-gray-500 max-w-md mx-auto mb-8">
+                        We couldn't find any locations matching your search criteria. Try adjusting your filters or search term.
+                    </p>
+                    {locations.length === 0 && (
+                        <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm">
+                            <AlertCircle size={16} className="mr-2" />
+                            Database appears to be empty
+                        </div>
+                    )}
+                </Card>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredLocations.map((location) => (
+                        <div key={location._id} className="transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md rounded-xl">
+                            <LiveStatusCard location={location} />
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.4s ease-out;
+                }
+            `}</style>
         </div>
     );
 };

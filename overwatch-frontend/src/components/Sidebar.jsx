@@ -8,42 +8,57 @@ const Sidebar = () => {
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-        { name: 'Locations', href: '/dashboard', icon: MapPin },
-        { name: 'Profile', href: '/dashboard', icon: User },
+        { name: 'Locations', href: '/locations', icon: MapPin },
+        { name: 'Profile', href: '/profile', icon: User },
     ];
 
-    const isActive = (path) => location.pathname === path;
+    const isActive = (path) => location.pathname.startsWith(path);
 
     const SidebarContent = () => (
-        <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2 className="text-xl font-bold text-gray-900">OVERWATCH</h2>
+        <div className="flex flex-col h-full pt-6">
+            {/* Mobile Close Button (Visible only on mobile) */}
+            <div className="lg:hidden flex justify-end px-6 pb-4">
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="lg:hidden text-gray-500 hover:text-gray-700"
+                    className="text-gray-500 hover:text-gray-700"
                 >
                     <X size={24} />
                 </button>
             </div>
-            <nav className="flex-1 p-4 space-y-1">
+
+            <nav className="flex-1 px-4 space-y-2">
                 {navigation.map((item) => {
                     const Icon = item.icon;
+                    const active = isActive(item.href);
                     return (
                         <Link
                             key={item.name}
                             to={item.href}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(item.href)
-                                    ? 'bg-primary text-white'
-                                    : 'text-gray-700 hover:bg-gray-100'
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${active
+                                ? 'bg-[#0f172a] text-white shadow-md'
+                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                                 }`}
                             onClick={() => setIsOpen(false)}
                         >
-                            <Icon size={20} />
+                            <Icon size={20} className={active ? 'text-white' : 'text-gray-500'} />
                             {item.name}
                         </Link>
                     );
                 })}
             </nav>
+
+            {/* User Profile Snippet at Bottom */}
+            <div className="p-4 border-t border-gray-200 mt-auto">
+                <div className="flex items-center gap-3 px-2">
+                    <div className="w-8 h-8 rounded-full bg-[#0f172a]/10 flex items-center justify-center text-[#0f172a] font-bold text-xs">
+                        AU
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">Admin User</p>
+                        <p className="text-xs text-gray-500 truncate">admin@overwatch.com</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 
@@ -52,7 +67,7 @@ const Sidebar = () => {
             {/* Mobile menu button */}
             <button
                 onClick={() => setIsOpen(true)}
-                className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-white rounded-lg shadow-md text-gray-700 hover:bg-gray-100"
+                className="lg:hidden fixed top-20 left-4 z-40 p-2 bg-white rounded-lg shadow-md text-gray-700 hover:bg-gray-100 border border-gray-200"
             >
                 <Menu size={24} />
             </button>
